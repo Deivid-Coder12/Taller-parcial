@@ -29,11 +29,17 @@ RTA: A) a.x
 
 
 # 2.Salida del programa:
+
 class A: 
+
   def __init__(self): 
-    self.__secret = 42 
+  
+   self.__secret = 42 
+   
 a = A() 
+
 print(hasattr(a, '__secret'), hasattr(a, '_A__secret')) 
+
 ¿Qué imprime?
 
 
@@ -42,6 +48,7 @@ automáticamente como “_nombreclase__nombreatributo”
 
 
 # 3.Verdadero o falso:
+
 a) El prefijo _ impide el acceso desde fuera de la clase. 
 
 RTA: Falso, lo que hace este es indicar que el atributo es protegido, mas no 
@@ -60,30 +67,51 @@ RTA: Verdadero, pues lo que hace este mecanismo es que cuando se utiliza el
 nombre del atributo.
 
 # 4) Lectura de código
+
 class Base: 
+
   def __init__(self): 
-    self._token = "abc" 
+  
+   
+  self._token = "abc" 
+
 class Sub(Base): 
+ 
   def reveal(self): 
-    return self._token 
+   
+  return self._token 
+
 print(Sub().reveal()) 
+
 ¿Qué se imprime y por qué no hay error de acceso?
 
 RTA: Lo que el programa imprime es “abc”, y no hay error de acceso porque el 
 dato es “protegido”, por lo que no pone ningún problema para ser llamado desde 
 otra clase.
 
+
 # 5) Name mangling en herencia
+
 class Base: 
+ 
   def __init__(self): 
-    self.__v = 1 
+   
+  self.__v = 1 
+
 class Sub(Base): 
+ 
   def __init__(self): 
-    super().__init__() 
-    self.__v = 2 
+   
+  super().__init__() 
+   
+  self.__v = 2 
+  
   def show(self): 
-    return (self.__v, self._Base__v) 
+    
+  return (self.__v, self._Base__v) 
+
 print(Sub().show()) 
+
 ¿Cuál es la salida?
 
 RTA: La salida es “2,1”, esto debido a que el método “show” esta llamando al 
@@ -91,48 +119,79 @@ atributo “__v” de su propia clase(Clase Sub), y está llamando al atributo
 “_Base__v” de la clase “Base” mediante el name mangling 
 
 
+
 # 6) Identifica el error 
+
 class Caja: 
+
   __slots__ = ('x',) 
+
 c = Caja() 
+
 c.x = 10 
+
 c.y = 20 
+
 ¿Qué ocurre y por qué?
 
 RTA: no hay ningún atributo de nombre “y”, por lo tanto el codigo dara error.
 
 
+
 # 7) Rellenar espacios 
+
 Completa para que b tenga un atributo “protegido por convención”. 
+
 Código original
+
 class B: 
+  
   def __init__(self): 
-    self ______ = 99
+ 
+  self ______ = 99
 
     
 Código completado
 
 
+
 class B: 
+ 
   def __init__(self): 
-    self._x= 99 
+   
+  self._x= 99 
+ 
   def imprimir
-    return(self._x)
+  
+  return(self._x)
+
 print(B().imprimir())
+
 Escribe el nombre correcto del atributo.
 
 
 # 8) Lectura de métodos “privados” 
+
 class M: 
+  
   def __init__(self): 
-    self._state = 0 
+    
+  self._state = 0 
+ 
   def _step(self): 
-    self._state += 1 
-    return self._state 
+    
+  self._state += 1 
+   
+  return self._state 
+  
   def __tick(self): 
-    return self._step() 
+    
+  return self._step() 
+
 m = M() 
+
 print(hasattr(m, '_step'), hasattr(m, '__tick'), hasattr(m, '_M__tick')) 
+
 ¿Qué imprime y por qué? 
 
 
@@ -144,31 +203,51 @@ correcta, por eso se imprime “true, false, true”
 
 
 # 9) Acceso a atributos privados 
+
 class S: 
+ 
   def __init__(self): 
-    self.__data = [1, 2] 
+   
+  self.__data = [1, 2] 
+  
   def size(self): 
-    return len(self.__data) 
+    
+  return len(self.__data) 
+
 s = S() 
+
 #Accede a __data (solo para comprobar), sin modificar el código de la 
 clase: 
+
 #Escribe una línea que obtenga la lista usando name mangling y la 
 imprima. 
+
 Escribe la línea solicitada.
 
 RTA= print(s._S__data)
 
 # 10) Comprensión de dir y mangling 
+
 class D: 
+  
   def __init__(self): 
-    self.__a = 1 
-    self._b = 2 
-    self.c = 3 
+   
+  self.__a = 1 
+    
+  self._b = 2 
+    
+  self.c = 3 
+
 d = D() 
+
 names = [n for n in dir(d) if 'a' in n] 
+
 print(names)
+
 ¿Cuál de estos nombres es más probable que aparezca en la lista: __a, _D__a o 
+
 a? 
+
 Explica.
 
 
@@ -179,69 +258,123 @@ ese atributo de manera automática como “_D__a”
 
 Parte B. Encapsulación con @property y validación 
 
+
 # 11) Completar propiedad con validación 
+
 Completa para que saldo nunca sea negativo. 
+
 class Cuenta: 
+  
   def __init__(self, saldo): 
-    self._saldo = 0
-    self.saldo = saldo
+ 
+  self._saldo = 0
+   self.saldo = saldo
+ 
   @property
+  
   def saldo(self):
+   
     return self._saldo
+ 
   @saldo.setter
+ 
   def saldo(self, value): 
-    if value < 0:
-      raise ValueError("El saldo no puede ser negativo")
+   
+  if value < 0:
+    
+  raise ValueError("El saldo no puede ser negativo")
+  
   self._saldo = value
+
 c=Cuenta(100)
 
 # 12) Propiedad de solo lectura 
+
 Convierte temperatura_f en un atributo de solo lectura que se calcula desde 
 temperatura_c.
 
+
 class Termometro:
+
   def __init__(self, temperatura_c):
-    self._c = float(temperatura_c)
+  
+  self._c = float(temperatura_c)
+
   @property
+
   def temperatura_c(self):
-    return self._c
+   
+  return self._c
+ 
   @property
+ 
   def temperatura_f(self):
-    return (self._c * 9/5) + 32
+  
+  return (self._c * 9/5) + 32
+
 t = Termometro(input("Ingrese el valor en grados celcius"))
+
 print(f"En celcius es {t.temperatura_c} y en farenheits es
+
 {t.temperatura_f}")
 
 
+
 # 13) Invariante con tipo 
+
 Haz que nombre sea siempre str. Si asignan algo que no sea str, lanza TypeError.
 
+
 class Usuario:
+
   def __init__(self, nombre):
-    if isinstance(nombre, str): 
-      self._nombre = nombre
-    else:
-      raise TypeError("El dato tiene que ser str")
+    
+  if isinstance(nombre, str): 
+      
+  self._nombre = nombre
+   
+  else:
+     
+  raise TypeError("El dato tiene que ser str")
+ 
   @property
+  
   def nombre(self):
-    return self._nombre
+    
+  return self._nombre
+
 nombre = Usuario("s")
+
 print(nombre.nombre)
 
 
+
 # 14) Encapsulación de colección 
+
 Expón una vista de solo lectura de una lista interna. 
+
 class Registro: 
+  
   def __init__(self): 
-    self.__items = ["obj.Escencial"] 
+   
+  self.__items = ["obj.Escencial"] 
+ 
   def add(self, x): 
-    self.__items.append(x) 
+  
+  self.__items.append(x) 
+  
   @property
-    def items(self):
-      return tuple(self.__items)
+    
+  def items(self):
+     
+  return tuple(self.__items)
+
 r=Registro()
+
 r.add("obj.modificable1")
+
 r.add("obj.modificable2")
+
 print(r.items)
 
 
