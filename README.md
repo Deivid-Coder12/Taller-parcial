@@ -383,26 +383,41 @@ el contenido
 Parte C. Diseño y refactor 
 
 # 15) Refactor a encapsulación 
+
 Refactoriza para evitar acceso directo al atributo y validar que velocidad sea entre 
 0 y 
 200. 
 
 
+
 class Motor: 
+  
   def __init__(self, velocidad): 
-    self.__velocidad = velocidad # refactor aquí 
+    
+  self.__velocidad = velocidad # refactor aquí 
+ 
   @property
+ 
   def velocidad(self):
-    if (0<= self.__velocidad <=200):
-      return self.__velocidad
-    else:
-      raise ValueError("la velocidad tiene que estar entre 0 y 200")
+   
+  if (0<= self.__velocidad <=200):
+     
+  return self.__velocidad
+   
+  else:
+      
+  raise ValueError("la velocidad tiene que estar entre 0 y 200")
+
 m=Motor(100)
+
 print(m.velocidad)
+
 Escribe la versión con @property.
 
 
+
 # 16) Elección de convención 
+
 Explica con tus palabras cuándo usarías _atributo frente a __atributo en una API 
 pública de una librería.
 
@@ -412,13 +427,21 @@ atrbibuto que tenga el “_”, pero que si se modifica ese atributo no conlleva
 inconveninetes.
 
 
+
 # 17) Detección de fuga de encapsulación 
+
 ¿Qué problema hay aquí? 
+
 class Buffer: 
+  
   def __init__(self, data): 
-    self._data = list(data) 
-  def get_data(self): 
+    
+  self._data = list(data) 
+
+def get_data(self): 
+    
     return self._data 
+
 Propón una corrección.
 
  
@@ -429,13 +452,20 @@ quiera eso, se podría mostrar una tupla, como se hizo en el ejercicio 14
 
 
 # 18) Diseño con herencia y mangling 
+
 ¿Dónde fallará esto y cómo lo arreglas? 
+
 class A: 
+  
   def __init__(self): 
-    self.__x = 1
+    
+  self.__x = 1
+
 class B(A): 
+  
   def get(self): 
-    return self.__x
+   
+  return self.__x
     
 RTA=Est código falla en que el método de la clase “B” no puede acceder asi a 
 “self.__x”, pues este es privado y se le aplica el name mangling, para arreglar 
@@ -446,37 +476,69 @@ esto es tan fácil como poner “_A__x” en vez de “self.__x”
 Completa para exponer solo un método seguro de un objeto interno.
 
 
+
 class _Repositorio: 
+  
   def __init__(self): 
-    self._datos = {} 
+    
+  self._datos = {} 
+  
   def guardar(self, k, v): 
-    self._datos[k] = v
+    
+  self._datos[k] = v
+ 
   def _dump(self): 
-    return dict(self._datos) 
+  
+  return dict(self._datos) 
+
 class Servicio: 
+  
   def __init__(self): 
-    self.__repo = _Repositorio() 
+  
+  self.__repo = _Repositorio() 
+  
   def guardar(self, k, v):
-    self.__repo.guardar(k,v)
+    
+  self.__repo.guardar(k,v)
+
 s=Servicio()
+
 s.guardar("animal", "raton")
+
 #Expón un método 'guardar' que delegue en el repositorio, 
+
 #pero NO expongas _dump ni __repo. 
 
 
 # 20) Mini-kata 
+
 class ContadorSeguro:
+  
   def __init__(self, n=0):
-    self._n = n
+    
+  self._n = n
+  
   def inc(self):
-    self._n += 1
-    self.__log() 
+
+ self._n += 1
+    
+  self.__log() 
+  
+  
   @property
+  
   def n(self):
-    return self._n
+    
+  return self._n
+  
   def __log(self):
-    print("tick")
+    
+  print("tick")
+
 c = ContadorSeguro()
+
 c.inc() 
+
 c.inc() 
+
 print("Valor final:", c.n)
