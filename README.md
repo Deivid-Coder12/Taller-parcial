@@ -1,17 +1,27 @@
 # En este repositorio se encontrara el taller del parcial, se encontrara un PDF con todas las respuestas, ademas, para cada codigo que fue modificado se subira su propio archivo.py
 # 1.Seleccion múltiple:
+
 Dada la clase: 
+
 class A: 
+
   x = 1 
+  
   _y = 2 
+  
   __z = 3 
+  
 a = A() 
+
 ¿Cuáles de los siguientes nombres existen como atributos accesibles 
-directamente desde 
-a? 
+directamente desde a? 
+
 A) a.x 
+
 B) a._y 
+
 C) a.__z 
+
 D) a._A__z
 
 
