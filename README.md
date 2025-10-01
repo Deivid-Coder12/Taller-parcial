@@ -1,5 +1,5 @@
-#En este repositorio se encontrara el taller del parcial, se encontrara un PDF con todas las respuestas, ademas, para cada codigo que fue modificado se subira su propio archivo.py
-1.Seleccion múltiple:
+# En este repositorio se encontrara el taller del parcial, se encontrara un PDF con todas las respuestas, ademas, para cada codigo que fue modificado se subira su propio archivo.py
+# 1.Seleccion múltiple:
 Dada la clase: 
 class A: 
   x = 1 
@@ -18,7 +18,7 @@ D) a._A__z
 RTA: A) a.x
 
 
-2.Salida del programa:
+# 2.Salida del programa:
 class A: 
   def __init__(self): 
     self.__secret = 42 
@@ -31,7 +31,7 @@ RTA= Imprime un false y un true, pues los atributos con protección se nombrará
 automáticamente como “_nombreclase__nombreatributo”
 
 
-3.Verdadero o falso:
+# 3.Verdadero o falso:
 a) El prefijo _ impide el acceso desde fuera de la clase. 
 
 RTA: Falso, lo que hace este es indicar que el atributo es protegido, mas no 
@@ -49,7 +49,7 @@ RTA: Verdadero, pues lo que hace este mecanismo es que cuando se utiliza el
 “__” en algún atributo le pone automáticamente el nombre de la clase antes del 
 nombre del atributo.
 
-4) Lectura de código
+# 4) Lectura de código
 class Base: 
   def __init__(self): 
     self._token = "abc" 
@@ -63,7 +63,7 @@ RTA: Lo que el programa imprime es “abc”, y no hay error de acceso porque el
 dato es “protegido”, por lo que no pone ningún problema para ser llamado desde 
 otra clase.
 
-6) Name mangling en herencia
+# 5) Name mangling en herencia
 class Base: 
   def __init__(self): 
     self.__v = 1 
@@ -81,7 +81,7 @@ atributo “__v” de su propia clase(Clase Sub), y está llamando al atributo
 “_Base__v” de la clase “Base” mediante el name mangling 
 
 
-8) Identifica el error 
+# 6) Identifica el error 
 class Caja: 
   __slots__ = ('x',) 
 c = Caja() 
@@ -92,7 +92,7 @@ c.y = 20
 RTA: no hay ningún atributo de nombre “y”, por lo tanto el codigo dara error.
 
 
-10) Rellenar espacios 
+# 7) Rellenar espacios 
 Completa para que b tenga un atributo “protegido por convención”. 
 Código original
 class B: 
@@ -112,7 +112,7 @@ print(B().imprimir())
 Escribe el nombre correcto del atributo.
 
 
-12) Lectura de métodos “privados” 
+# 8) Lectura de métodos “privados” 
 class M: 
   def __init__(self): 
     self._state = 0 
@@ -133,22 +133,22 @@ al método dos veces, una de la manera incorrecta y la segunda de manera
 correcta, por eso se imprime “true, false, true”
 
 
-13) Acceso a atributos privados 
+# 9) Acceso a atributos privados 
 class S: 
   def __init__(self): 
     self.__data = [1, 2] 
   def size(self): 
     return len(self.__data) 
 s = S() 
-# Accede a __data (solo para comprobar), sin modificar el código de la 
+#Accede a __data (solo para comprobar), sin modificar el código de la 
 clase: 
-# Escribe una línea que obtenga la lista usando name mangling y la 
+#Escribe una línea que obtenga la lista usando name mangling y la 
 imprima. 
 Escribe la línea solicitada.
 
 RTA= print(s._S__data)
 
-10) Comprensión de dir y mangling 
+# 10) Comprensión de dir y mangling 
 class D: 
   def __init__(self): 
     self.__a = 1 
@@ -169,7 +169,7 @@ ese atributo de manera automática como “_D__a”
 
 Parte B. Encapsulación con @property y validación 
 
-11) Completar propiedad con validación 
+# 11) Completar propiedad con validación 
 Completa para que saldo nunca sea negativo. 
 class Cuenta: 
   def __init__(self, saldo): 
@@ -185,7 +185,7 @@ class Cuenta:
   self._saldo = value
 c=Cuenta(100)
 
-12) Propiedad de solo lectura 
+# 12) Propiedad de solo lectura 
 Convierte temperatura_f en un atributo de solo lectura que se calcula desde 
 temperatura_c.
 
@@ -203,7 +203,7 @@ print(f"En celcius es {t.temperatura_c} y en farenheits es
 {t.temperatura_f}")
 
 
-13) Invariante con tipo 
+# 13) Invariante con tipo 
 Haz que nombre sea siempre str. Si asignan algo que no sea str, lanza TypeError.
 
 class Usuario:
@@ -219,7 +219,7 @@ nombre = Usuario("s")
 print(nombre.nombre)
 
 
-14) Encapsulación de colección 
+# 14) Encapsulación de colección 
 Expón una vista de solo lectura de una lista interna. 
 class Registro: 
   def __init__(self): 
@@ -235,11 +235,11 @@ r.add("obj.modificable2")
 print(r.items)
 
 
-# Crea una propiedad 'items' que retorne una tupla inmutable con 
+#Crea una propiedad 'items' que retorne una tupla inmutable con 
 el contenido
 Parte C. Diseño y refactor 
 
-15) Refactor a encapsulación 
+# 15) Refactor a encapsulación 
 Refactoriza para evitar acceso directo al atributo y validar que velocidad sea entre 
 0 y 
 200. 
@@ -259,7 +259,7 @@ print(m.velocidad)
 Escribe la versión con @property.
 
 
-16) Elección de convención 
+# 16) Elección de convención 
 Explica con tus palabras cuándo usarías _atributo frente a __atributo en una API 
 pública de una librería.
 
@@ -269,7 +269,7 @@ atrbibuto que tenga el “_”, pero que si se modifica ese atributo no conlleva
 inconveninetes.
 
 
-17) Detección de fuga de encapsulación 
+# 17) Detección de fuga de encapsulación 
 ¿Qué problema hay aquí? 
 class Buffer: 
   def __init__(self, data): 
@@ -285,7 +285,7 @@ es que cualquiera puede modificar el atributo original, y en caso de que no se
 quiera eso, se podría mostrar una tupla, como se hizo en el ejercicio 14
 
 
-18) Diseño con herencia y mangling 
+# 18) Diseño con herencia y mangling 
 ¿Dónde fallará esto y cómo lo arreglas? 
 class A: 
   def __init__(self): 
@@ -299,7 +299,7 @@ RTA=Est código falla en que el método de la clase “B” no puede acceder asi
 esto es tan fácil como poner “_A__x” en vez de “self.__x”
 
 
-19) Composición y fachada 
+# 19) Composición y fachada 
 Completa para exponer solo un método seguro de un objeto interno.
 
 
@@ -317,11 +317,11 @@ class Servicio:
     self.__repo.guardar(k,v)
 s=Servicio()
 s.guardar("animal", "raton")
-# Expón un método 'guardar' que delegue en el repositorio, 
-# pero NO expongas _dump ni __repo. 
+#Expón un método 'guardar' que delegue en el repositorio, 
+#pero NO expongas _dump ni __repo. 
 
 
-20) Mini-kata 
+# 20) Mini-kata 
 class ContadorSeguro:
   def __init__(self, n=0):
     self._n = n
